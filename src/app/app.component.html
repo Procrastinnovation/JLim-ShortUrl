@@ -225,8 +225,31 @@
           <clipPath id="a"><path fill="#fff" d="M0 0h982v239H0z" /></clipPath>
         </defs>
       </svg>
-      <h1>Hello, {{ title }}</h1>
-      <p>Congratulations! Your app is running. 🎉</p>
+      
+      <h3>Generate TinyUrl with C# API: </h3>
+
+      <form [formGroup]="urlForm" (ngSubmit)="onSubmit()">
+        <div class="form-group">
+          <label for="url">Enter URL: </label>
+          <label for="url">example: (https://www.google.com/) </label>
+          <input type="text" class="form-control" id="url" formControlName="url" required>
+        </div>
+        <button type="submit" class="btn btn-success">Submit</button>
+      </form>
+
+      <div>
+        <label>Your TinyUrl:&nbsp;</label>
+        <span>
+          <a [attr.href]="this.urlForm.value.url" target="_blank" ><span id="maskedURL">{{newURL$ | async}}</span></a>
+          &nbsp;<i *ngIf="newURL$ | async;" class="bi bi-copy" (click)="copy()"></i>
+        </span>
+      </div>
+
+      <div>
+        <label>Total number of TinyUrl have generated: </label>
+        {{counts}}
+      </div>
+
     </div>
     <div class="divider" role="separator" aria-label="Divider"></div>
     <div class="right-side">
